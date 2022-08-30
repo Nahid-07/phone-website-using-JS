@@ -17,14 +17,15 @@ const displayData = (phones) => {
     }else{
         btnAll.classList.add('d-none')
     }
+
     // wnaring messege displaying 
+
     const warningText = document.getElementById('warning');
     if(phones.length === 0){
         warningText.classList.remove('d-none')
     }else{
         warningText.classList.add('d-none');
     }
-
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.textContent = '';
     phones.forEach(phone => {
@@ -45,14 +46,24 @@ const displayData = (phones) => {
     })
     loading(false)
 }
-// search button
-document.getElementById('search-button').addEventListener('click', () => {
+// common function search
+const searchProcess = ()=>{
     loading(true)
     const searchfield = document.getElementById('search-field');
     const searchInput = searchfield.value;
     loadData(searchInput);
+}
+// search button
+document.getElementById('search-button').addEventListener('click', () => {
+        searchProcess();
 })
-
+// search with hit enter key
+document.getElementById('search-field').addEventListener('keypress',(event) => {
+    if(event.key === 'Enter'){
+        searchProcess();
+    }
+})
+// loader function
 const loading = (isLoading) => {
     const loader = document.getElementById('loading');
     if(isLoading){
