@@ -1,5 +1,5 @@
-const loadData = async(id,dataLimit) =>{
-    const url = `https://openapi.programming-hero.com/api/phones?search=${id}`;
+const loadData = async(search,dataLimit) =>{
+    const url = `https://openapi.programming-hero.com/api/phones?search=${search}`;
     const res = await fetch(url)
     const data = await res.json()
     displayData(data.data,dataLimit)
@@ -38,7 +38,7 @@ const displayData = (phones,dataLimit) => {
                 <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
                 additional content. This content is a little bit longer.</p>
-                <button href="#" class="btn btn-primary">Go somewhere</button>
+                <button type="button" onclick="showModal('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal">Details</button>
             </div>
         </div>
     `;
@@ -46,6 +46,7 @@ const displayData = (phones,dataLimit) => {
     })
     loading(false)
 }
+loadData('iphone')
 // common function search
 const searchProcess = (dataLimit)=>{
     loading(true)
@@ -76,3 +77,15 @@ const loading = (isLoading) => {
 document.getElementById('btn-show-more').addEventListener('click',()=>{
     searchProcess();
 })
+const showModal = async(id) =>{
+    const url = ` https://openapi.programming-hero.com/api/phone/${id}`;
+    const res = await fetch(url)
+    const data = await res.json()
+    console.log(data.data)
+}
+// display phone details in modal
+
+const displayDetails = (info) =>{
+
+}
+
