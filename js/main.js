@@ -6,7 +6,6 @@ const loadData = async(search,dataLimit) =>{
 }
 // display data on the UI
 const displayData = (phones,dataLimit) => {
-    console.log(phones);
 
     // show more button implement
 
@@ -86,7 +85,6 @@ const showModal = async(id) =>{
 // display phone details in modal
 
 const displayDetails = (info) =>{
-    console.log(info)
     const title = document.getElementById('phoneSpecLabel');
     title.textContent = `${info.name}`;
     const modalBody = document.getElementById('modalID');
