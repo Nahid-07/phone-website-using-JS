@@ -38,7 +38,7 @@ const displayData = (phones,dataLimit) => {
                 <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
                 additional content. This content is a little bit longer.</p>
-                <button type="button" onclick="showModal('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailsModal">Details</button>
+                <button type="button" onclick="showModal('${phone.slug}')" class="btn btn-primary"data-bs-toggle="modal" data-bs-target="#phoneSpec">Details</button>
             </div>
         </div>
     `;
@@ -81,11 +81,28 @@ const showModal = async(id) =>{
     const url = ` https://openapi.programming-hero.com/api/phone/${id}`;
     const res = await fetch(url)
     const data = await res.json()
-    console.log(data.data)
+    displayDetails(data.data)
 }
 // display phone details in modal
 
 const displayDetails = (info) =>{
-
+    console.log(info)
+    const title = document.getElementById('phoneSpecLabel');
+    title.textContent = `${info.name}`;
+    const modalBody = document.getElementById('modalID');
+    modalBody.innerHTML =`
+    <div class="card p-1">
+    <img src="${info.image}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">${info.name}</h5>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Brand : ${info.brand}</li>
+      <li class="list-group-item">releaseDate : ${info.releaseDate ? info.releaseDate : 'not found'}</li>
+      <li class="list-group-item">${info.mainFeatures.displaySize}</li>
+      <li class="list-group-item">${info.mainFeatures.memory}</li>
+    </ul>
+  </div>
+    `
+    
 }
 
